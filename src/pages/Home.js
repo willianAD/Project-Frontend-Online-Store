@@ -1,18 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getCategories } from '../services/api';
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
       productList: [],
+      categories: [],
     };
   }
 
+  async componentDidMount() {
+    const categories = await getCategories();
+    this.setState({ categories });
+  }
+
   render() {
-    const { productList } = this.state;
+    const { productList, categories } = this.state;
     return (
       <main>
+        <nav>
+          {categories.map((category) => (
+            <button
+              type="submit"
+              key={ category.id }
+              data-testid="category"
+            >
+              {category.name}
+            </button>
+          ))}
+        </nav>
         <label htmlFor="search">
           <input type="text" id="search" />
         </label>
