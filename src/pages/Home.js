@@ -62,7 +62,9 @@ class Home extends React.Component {
         </button>
         <section>
           {!buttonClicked && (
-            <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
+            <span data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </span>
           )}
           {
             productList.length && buttonClicked
