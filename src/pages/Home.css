@@ -1,0 +1,21 @@
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-list a {
+  text-decoration: none;
+}
+
+.product-card {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  margin: 5px;
+  padding: 10px;
+  width: 300px;
+}

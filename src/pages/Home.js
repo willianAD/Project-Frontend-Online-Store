@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import './Home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -67,7 +68,7 @@ class Home extends React.Component {
         >
           Pesquisar
         </button>
-        <section>
+        <section className="product-list">
           {!buttonClicked && (
             <span data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
@@ -77,11 +78,17 @@ class Home extends React.Component {
             productList.length
               ? (
                 productList.map(({ id, title, thumbnail, price }) => (
-                  <div key={ id } data-testid="product">
-                    <span>{title}</span>
-                    <img src={ thumbnail } alt={ title } />
-                    <span>{price}</span>
-                  </div>
+                  <Link
+                    to={ `product/${id}` }
+                    key={ id }
+                    data-testid="product-detail-link"
+                  >
+                    <div data-testid="product" className="product-card">
+                      <span>{title}</span>
+                      <img src={ thumbnail } alt={ title } />
+                      <span>{price}</span>
+                    </div>
+                  </Link>
                 )))
               : buttonClicked && <span>Nenhum produto foi encontrado</span>
           }
