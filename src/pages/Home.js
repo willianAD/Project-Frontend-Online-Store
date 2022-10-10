@@ -21,12 +21,16 @@ class Home extends React.Component {
 
   handleChange = ({ target: { name, value } }) => this.setState({ [name]: value });
 
-  handleButton = async (event) => {
-    event.preventDefault();
+  handleSearch = async () => {
     const { query, category } = this.state;
     const response = await getProductsFromCategoryAndQuery(category, query);
     const productList = response ? response.results : [];
     this.setState({ productList, buttonClicked: true });
+  };
+
+  handleClick = ({ target }) => {
+    const { name } = target;
+    this.setState({ category: name }, this.handleSearch);
   };
 
   render() {
@@ -36,8 +40,10 @@ class Home extends React.Component {
         <nav>
           {categories.map((category) => (
             <button
-              type="submit"
+              type="button"
+              name={ category.id }
               key={ category.id }
+              onClick={ this.handleClick }
               data-testid="category"
             >
               {category.name}
@@ -55,8 +61,8 @@ class Home extends React.Component {
           />
         </label>
         <button
-          type="submit"
-          onClick={ this.handleButton }
+          type="button"
+          onClick={ this.handleSearch }
           data-testid="query-button"
         >
           Pesquisar
@@ -68,7 +74,7 @@ class Home extends React.Component {
             </span>
           )}
           {
-            productList.length && buttonClicked
+            productList.length
               ? (
                 productList.map(({ id, title, thumbnail, price }) => (
                   <div key={ id } data-testid="product">
@@ -77,7 +83,7 @@ class Home extends React.Component {
                     <span>{price}</span>
                   </div>
                 )))
-              : <span>Nenhum produto foi encontrado</span>
+              : buttonClicked && <span>Nenhum produto foi encontrado</span>
           }
 
         </section>
