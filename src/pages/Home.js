@@ -100,7 +100,7 @@ class Home extends React.Component {
           {
             productList.length
               ? (
-                productList.map(({ id, title, thumbnail, price }, index) => (
+                productList.map(({ id, title, thumbnail, price, shipping }, index) => (
                   <div key={ index }>
                     <Link
                       to={ { pathname: `product/${id}`, state: this.state } }
@@ -110,6 +110,8 @@ class Home extends React.Component {
                       <div data-testid="product" className="product-card" name={ id }>
                         <span>{title}</span>
                         <img src={ thumbnail } alt={ title } />
+                        {shipping.free_shipping
+                        && <p data-testid="free-shipping">Frete grátis!</p>}
                         <span>{price}</span>
                       </div>
                     </Link>
