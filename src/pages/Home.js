@@ -39,17 +39,19 @@ class Home extends React.Component {
     return (
       <main>
         <nav>
-          {categories.map((category) => (
-            <button
-              type="button"
-              name={ category.id }
-              key={ category.id }
-              onClick={ this.handleClick }
-              data-testid="category"
-            >
-              {category.name}
-            </button>
-          ))}
+          {
+            categories.map((category) => (
+              <button
+                type="button"
+                name={ category.id }
+                key={ category.id }
+                onClick={ this.handleClick }
+                data-testid="category"
+              >
+                {category.name}
+              </button>
+            ))
+          }
         </nav>
         <label htmlFor="search">
           <input
@@ -69,11 +71,13 @@ class Home extends React.Component {
           Pesquisar
         </button>
         <section className="product-list">
-          {!buttonClicked && (
-            <span data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </span>
-          )}
+          {
+            !buttonClicked && (
+              <span data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </span>
+            )
+          }
           {
             productList.length
               ? (
@@ -92,7 +96,6 @@ class Home extends React.Component {
                 )))
               : buttonClicked && <span>Nenhum produto foi encontrado</span>
           }
-
         </section>
         <Link to="/shoppingcart">
           <button type="button" data-testid="shopping-cart-button">

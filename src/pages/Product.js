@@ -2,6 +2,7 @@ import { shape, string } from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
+import Form from './Form';
 
 class Product extends Component {
   constructor() {
@@ -19,6 +20,7 @@ class Product extends Component {
 
   render() {
     const { product } = this.state;
+    const { match: { params: { id } } } = this.props;
     return (
       <section>
         {product && (
@@ -45,6 +47,9 @@ class Product extends Component {
             Carrinho de Compras
           </button>
         </Link>
+        <Form
+          id={ id }
+        />
       </section>
     );
   }
