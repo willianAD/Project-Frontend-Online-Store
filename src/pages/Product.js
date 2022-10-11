@@ -1,4 +1,4 @@
-import { shape, string } from 'prop-types';
+import PropTypes, { shape, string } from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
@@ -20,7 +20,8 @@ class Product extends Component {
 
   render() {
     const { product } = this.state;
-    const { match: { params: { id } } } = this.props;
+    const { match: { params: { id } }, history: { location } } = this.props;
+    const { state } = location;
     return (
       <section>
         {product && (
@@ -42,7 +43,7 @@ class Product extends Component {
             </div>
           </>
         )}
-        <Link to="/shoppingcart">
+        <Link to={ { pathname: '/shoppingcart', state } }>
           <button type="button" data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
@@ -61,6 +62,7 @@ Product.propTypes = {
       id: string,
     }),
   }).isRequired,
-};
+  history: PropTypes.object,
+}.isRequired;
 
 export default Product;

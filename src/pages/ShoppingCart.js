@@ -11,12 +11,12 @@ class ShoppingCart extends React.Component {
         <div>
           <p data-testid="shopping-cart-product-quantity">{cartItems.length}</p>
           <ul>
-            {cartItems.map((product, index) => (
+            {cartItems.map((item, index) => (
               <li
                 key={ index }
                 data-testid="shopping-cart-product-name"
               >
-                {product.title}
+                {item.title}
               </li>
 
             ))}

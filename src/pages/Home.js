@@ -103,7 +103,7 @@ class Home extends React.Component {
                 productList.map(({ id, title, thumbnail, price }, index) => (
                   <div key={ index }>
                     <Link
-                      to={ `product/${id}` }
+                      to={ { pathname: `product/${id}`, state: this.state } }
                       key={ id }
                       data-testid="product-detail-link"
                     >
