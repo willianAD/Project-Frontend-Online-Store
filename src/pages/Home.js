@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import './Home.css';
 
@@ -28,7 +27,6 @@ class Home extends React.Component {
   addCartItem = () => {
     const { productList, id } = this.state;
     const product = productList.find((ele) => ele.id === id);
-    console.log(product);
     this.setState((prevState) => ({
       cartItems: [...prevState.cartItems, product],
     }));
@@ -53,8 +51,6 @@ class Home extends React.Component {
 
   render() {
     const { productList, categories, buttonClicked } = this.state;
-    const { history: { push } } = this.props;
-    console.log(push);
     return (
       <main>
         <nav>
@@ -129,7 +125,7 @@ class Home extends React.Component {
               : buttonClicked && <span>Nenhum produto foi encontrado</span>
           }
         </section>
-        <Link to={ { pathname: 'shoppingcart', state: this.state } }>
+        <Link to="shoppingcart">
           <button type="button" data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
@@ -138,8 +134,5 @@ class Home extends React.Component {
     );
   }
 }
-
-Home.propTypes = {
-  history: PropTypes.object }.isRequired;
 
 export default Home;
