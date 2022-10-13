@@ -19,6 +19,8 @@ class Home extends React.Component {
 
   async componentDidMount() {
     const categories = await getCategories();
+    // const storage = JSON.parse(localStorage.getItem('cartItems'));
+    // if (storage) this.setState({ cartItems: storage });
     this.setState({ categories });
   }
 
@@ -27,9 +29,15 @@ class Home extends React.Component {
   addCartItem = () => {
     const { productList, id } = this.state;
     const product = productList.find((ele) => ele.id === id);
-    this.setState((prevState) => ({
-      cartItems: [...prevState.cartItems, product],
-    }));
+    product.quantity = (!product.quantity) ? 1 : product.quantity + 1;
+
+    this.setState(({ cartItems }) => {
+      const repeated = cartItems.find((item) => item.id === id);
+      return (repeated) ? ({ cartItems }) : ({ cartItems: [...cartItems, product] });
+    }, () => {
+      const { cartItems } = this.state;
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    });
   };
 
   handleSearch = async () => {

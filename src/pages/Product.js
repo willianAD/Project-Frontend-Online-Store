@@ -19,14 +19,14 @@ class Product extends Component {
   }
 
   addToCart = () => {
-    let cart = [];
     const { product } = this.state;
-    if (Object.prototype.hasOwnProperty.call(localStorage, 'cartItems')) {
-      cart = JSON.parse(localStorage.getItem('cartItems'));
-    }
-    cart.push(product);
+    product.quantity = 1;
+    const cart = JSON.parse(localStorage.getItem('cartItems'));
+    const newCart = (cart) || [];
 
-    localStorage.setItem('cartItems', JSON.stringify(cart));
+    const repeated = newCart.find((item) => item.id === product.id);
+    if (!repeated) newCart.push(product);
+    localStorage.setItem('cartItems', JSON.stringify(newCart));
   };
 
   render() {
