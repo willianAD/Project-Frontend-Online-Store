@@ -45,7 +45,7 @@ class ShoppingCart extends React.Component {
       <main>
         { cartItems.length ? (
           <div>
-            <p data-testid="shopping-cart-product-quantity">
+            <p>
               {cartItems.map((item) => item.quantity)
                 .reduce((acc, curr) => acc + curr, 0)}
             </p>
@@ -70,7 +70,9 @@ class ShoppingCart extends React.Component {
                   >
                     -
                   </button>
-                  <span>{item.quantity}</span>
+                  <span data-testid="shopping-cart-product-quantity">
+                    {item.quantity}
+                  </span>
                   <button
                     type="button"
                     data-testid="product-increase-quantity"
