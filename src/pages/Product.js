@@ -1,4 +1,4 @@
-import PropTypes, { shape, string } from 'prop-types';
+import { shape, string } from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
@@ -18,10 +18,20 @@ class Product extends Component {
     this.setState({ product });
   }
 
+  addToCart = () => {
+    let cart = [];
+    const { product } = this.state;
+    if (Object.prototype.hasOwnProperty.call(localStorage, 'cartItems')) {
+      cart = JSON.parse(localStorage.getItem('cartItems'));
+    }
+    cart.push(product);
+
+    localStorage.setItem('cartItems', JSON.stringify(cart));
+  };
+
   render() {
     const { product } = this.state;
-    const { match: { params: { id } }, history: { location } } = this.props;
-    const { state } = location;
+    const { match: { params: { id } } } = this.props;
     return (
       <section>
         {product && (
@@ -43,7 +53,15 @@ class Product extends Component {
             </div>
           </>
         )}
-        <Link to={ { pathname: '/shoppingcart', state } }>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addToCart }
+        >
+          Adicionar ao Carrinho
+        </button>
+
+        <Link to="/shoppingcart">
           <button type="button" data-testid="shopping-cart-button">
             Carrinho de Compras
           </button>
@@ -62,7 +80,6 @@ Product.propTypes = {
       id: string,
     }),
   }).isRequired,
-  history: PropTypes.object,
 }.isRequired;
 
 export default Product;

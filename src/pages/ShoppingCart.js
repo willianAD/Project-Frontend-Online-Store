@@ -1,11 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 class ShoppingCart extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      cartItems: [],
+    };
+  }
+
+  componentDidMount() {
+    const storage = JSON.parse(localStorage.getItem('cartItems'));
+    if (storage) this.setState({ cartItems: storage });
+  }
+
   render() {
-    const { history: { location } } = this.props;
-    const { state: { cartItems } } = location;
+    const { cartItems } = this.state;
     return (
       <main>
         <div>
@@ -30,8 +40,5 @@ class ShoppingCart extends React.Component {
     );
   }
 }
-
-ShoppingCart.propTypes = {
-  history: PropTypes.object }.isRequired;
 
 export default ShoppingCart;
