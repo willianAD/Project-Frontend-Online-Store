@@ -45,6 +45,7 @@ class ShoppingCart extends React.Component {
       <main>
         { cartItems.length ? (
           <div>
+            <p>Quantidade de Itens</p>
             <p>
               {cartItems.map((item) => item.quantity)
                 .reduce((acc, curr) => acc + curr, 0)}
@@ -62,6 +63,7 @@ class ShoppingCart extends React.Component {
                   >
                     X
                   </button>
+                  <img src={ item.permalink } alt={ item.title } />
                   <span>{item.title}</span>
                   <button
                     type="button"
@@ -85,9 +87,7 @@ class ShoppingCart extends React.Component {
             </ul>
           </div>
         ) : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
-        <ul>
-          <li><Link to="/">Home</Link></li>
-        </ul>
+        <Link to="/">Home</Link>
       </main>
     );
   }
