@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import Form from './Form';
+import shopping from '../images/shopping-cart.png';
+import '../styles/product.css';
 
 class Product extends Component {
   constructor() {
@@ -36,36 +38,40 @@ class Product extends Component {
       <section>
         {product && (
           <>
-            <h1 data-testid="product-detail-name">
-              {product.title}
-              <span data-testid="product-detail-price">{` - R$ ${product.price}`}</span>
+            <h1 className="product-detail-name">
+              { product.title }
             </h1>
             <div>
-              <img
-                src={ product.pictures[0].url }
-                alt={ product.title }
-                data-testid="product-detail-image"
-              />
+              <div className="product-detail-image">
+                <img
+                  src={ product.pictures[0].url }
+                  alt={ product.title }
+                />
+              </div>
               <div>
                 <p />
-                {product.shipping.free_shipping && <p>Frete grátis!</p>}
+                { product.shipping.free_shipping && <span>Frete grátis!</span> }
               </div>
+              <span>
+                {`R$ ${product.price}`}
+              </span>
             </div>
           </>
         )}
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addToCart }
-        >
-          Adicionar ao Carrinho
-        </button>
-
-        <Link to="/shoppingcart">
-          <button type="button" data-testid="shopping-cart-button">
-            Carrinho de Compras
+        <div className="div-button">
+          <button
+            type="button"
+            className="product-add-to-cart"
+            onClick={ this.addToCart }
+          >
+            Adicionar ao Carrinho
           </button>
-        </Link>
+          <Link to="/shoppingcart">
+            <button type="button" className="shopping-cart-button">
+              <img src={ shopping } alt="shopping" className="shopping-cart2" />
+            </button>
+          </Link>
+        </div>
         <Form
           id={ id }
         />

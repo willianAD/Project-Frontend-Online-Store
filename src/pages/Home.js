@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import './Home.css';
+import pesquisa from '../images/pesquisa.png';
+import '../styles/home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -19,8 +20,6 @@ class Home extends React.Component {
 
   async componentDidMount() {
     const categories = await getCategories();
-    // const storage = JSON.parse(localStorage.getItem('cartItems'));
-    // if (storage) this.setState({ cartItems: storage });
     this.setState({ categories });
   }
 
@@ -58,10 +57,10 @@ class Home extends React.Component {
   };
 
   render() {
-    const { productList, categories, buttonClicked } = this.state;
+    const { productList, categories, buttonClicked, query } = this.state;
     return (
       <main>
-        <nav>
+        <nav className="nav-buttons">
           {
             categories.map((category) => (
               <button
@@ -69,34 +68,36 @@ class Home extends React.Component {
                 name={ category.id }
                 key={ category.id }
                 onClick={ this.handleClick }
-                data-testid="category"
+                className="button-category"
               >
                 {category.name}
               </button>
             ))
           }
         </nav>
-        <label htmlFor="search">
-          <input
-            type="text"
-            id="search"
-            name="query"
-            data-testid="query-input"
-            // value={ query }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="button"
-          onClick={ this.handleSearch }
-          data-testid="query-button"
-        >
-          Pesquisar
-        </button>
+        <div className="div-search">
+          <label htmlFor="search" className="query-label">
+            <input
+              type="text"
+              id="search"
+              name="query"
+              className="query-input"
+              value={ query }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <button
+            type="button"
+            onClick={ this.handleSearch }
+            className="query-button"
+          >
+            <img src={ pesquisa } alt="search" className="button-search" />
+          </button>
+        </div>
         <section className="product-list">
           {
             !buttonClicked && (
-              <span data-testid="home-initial-message">
+              <span>
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </span>
             )
@@ -109,35 +110,30 @@ class Home extends React.Component {
                     <Link
                       to={ { pathname: `product/${id}`, state: this.state } }
                       key={ id }
-                      data-testid="product-detail-link"
                     >
-                      <div data-testid="product" className="product-card" name={ id }>
-                        <span>{title}</span>
+                      <div className="product-card" name={ id }>
+                        <p>{title}</p>
                         <img src={ thumbnail } alt={ title } />
                         {shipping.free_shipping
-                        && <p data-testid="free-shipping">Frete grátis!</p>}
-                        <span>{price}</span>
+                        && <p>Frete grátis!</p>}
+                        <p>{`R$${price}`}</p>
                       </div>
                     </Link>
-                    <button
-                      name={ id }
-                      type="button"
-                      onClick={ this.cartClick }
-                      data-testid="product-add-to-cart"
-                    >
-                      Adicionar ao carrinho
-
-                    </button>
+                    <div className="div-add-to-cart">
+                      <button
+                        name={ id }
+                        type="button"
+                        onClick={ this.cartClick }
+                        className="product-add-to-cart"
+                      >
+                        Adicionar ao carrinho
+                      </button>
+                    </div>
                   </div>
                 )))
               : buttonClicked && <span>Nenhum produto foi encontrado</span>
           }
         </section>
-        <Link to="shoppingcart">
-          <button type="button" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </button>
-        </Link>
       </main>
     );
   }

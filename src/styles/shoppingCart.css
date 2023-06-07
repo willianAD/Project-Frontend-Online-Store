@@ -1,0 +1,56 @@
+.link-home {
+  padding-top: 10px;
+  margin-left: 5px;
+  text-decoration: none;
+  font-size: 25px;
+  color: rgb(0, 209, 157);
+}
+
+.seta-voltar {
+  width: 20px;
+}
+
+.title-qtd-itens {
+  display: flex;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 50px;
+}
+
+.shopping-cart-product-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  margin-top: 3%;
+}
+
+.remove-product {
+  margin: 2%;
+  width: 40px;
+  height: 40;
+  border: 0;
+  border-radius: 50%;
+  background-color: white;
+  color: rgba(255, 0, 0, 0.884);
+  font-size: 30px;
+}
+
+.decrease-increase-quantity {
+  margin: 2%;
+  width: 40px;
+  height: 40;
+  border: 0;
+  border-radius: 50%;
+  background-color: white;
+  color: rgb(70, 70, 70);
+  font-size: 40px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 50px;
+}

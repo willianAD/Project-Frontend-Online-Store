@@ -1,17 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getProductById } from '../services/api';
+import seta from '../images/seta-voltar.png';
+import '../styles/shoppingCart.css';
 
 class ShoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
       cartItems: [],
+      url: [],
+      total: 0,
     };
   }
 
   componentDidMount() {
-    const storage = JSON.parse(localStorage.getItem('cartItems'));
-    if (storage) this.setState({ cartItems: storage });
+    const getStorage = JSON.parse(localStorage.getItem('cartItems'));
+    if (getStorage) {
+      const cartList = getStorage.filter((e) => getProductById(e.id));
+      const total = this.totalPrice();
+      this.setState({
+        cartItems: getStorage,
+        url: cartList,
+        total,
+      });
+    }
   }
 
   componentDidUpdate() {
@@ -19,75 +32,103 @@ class ShoppingCart extends React.Component {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
-  increaseItem = (pos) => {
+  increaseItem = (index) => {
     const { cartItems } = this.state;
-    if (cartItems[pos].quantity < cartItems[pos].available_quantity) {
-      cartItems[pos].quantity += 1;
+    if (cartItems[index].quantity <= cartItems[index].available_quantity) {
+      cartItems[index].quantity += 1;
     }
-    this.setState({ cartItems });
+    const total = this.totalPrice();
+    this.setState({
+      cartItems,
+      total,
+    });
   };
 
-  decreaseItem = (pos) => {
+  decreaseItem = (index) => {
     const { cartItems } = this.state;
-    if (cartItems[pos].quantity > 1)cartItems[pos].quantity -= 1;
-    this.setState({ cartItems });
+    if (cartItems[index].quantity > 1)cartItems[index].quantity -= 1;
+    const total = this.totalPrice();
+    this.setState({
+      cartItems,
+      total,
+    });
   };
 
-  removeItem = (pos) => {
+  removeItem = (index) => {
     const { cartItems } = this.state;
-    cartItems.splice(pos, 1);
-    this.setState({ cartItems });
+    cartItems.splice(index, 1);
+    const total = this.totalPrice();
+    this.setState({
+      cartItems,
+      total,
+    });
+  };
+
+  totalPrice = () => {
+    const { cartItems } = this.state;
+    const subTotal = cartItems.map((e) => e.quantity * e.price);
+    const result = subTotal.reduce((acc, cur) => +acc + +cur, +0);
+    return result;
   };
 
   render() {
-    const { cartItems } = this.state;
+    const { cartItems, url, total } = this.state;
     return (
       <main>
+        <div className="link-home">
+          <Link to="/" className="link-home">
+            <img src={ seta } alt="seta-voltar" className="seta-voltar" />
+            Voltar
+          </Link>
+        </div>
         { cartItems.length ? (
           <div>
-            <p>Quantidade de Itens</p>
-            <p>
+            <p className="title-qtd-itens">Quantidade de Itens</p>
+            <p className="title-qtd-itens">
               {cartItems.map((item) => item.quantity)
                 .reduce((acc, curr) => acc + curr, 0)}
             </p>
-            <ul>
+            <div>
               {cartItems.map((item, index) => (
-                <li
+                <div
                   key={ index }
-                  data-testid="shopping-cart-product-name"
+                  className="shopping-cart-product-name"
                 >
                   <button
                     type="button"
-                    data-testid="remove-product"
+                    className="remove-product"
                     onClick={ () => this.removeItem(index) }
                   >
                     X
                   </button>
-                  <img src={ item.permalink } alt={ item.title } />
-                  <span>{item.title}</span>
+                  <div className="product-card">
+                    <p>{item.title}</p>
+                    <img src={ url[index].thumbnail } alt={ item.title } />
+                    <p>{`R$${item.price}`}</p>
+                  </div>
                   <button
                     type="button"
-                    data-testid="product-decrease-quantity"
+                    className="decrease-increase-quantity"
                     onClick={ () => this.decreaseItem(index) }
                   >
                     -
                   </button>
-                  <span data-testid="shopping-cart-product-quantity">
+                  <p data-testid="shopping-cart-product-quantity">
                     {item.quantity}
-                  </span>
+                  </p>
                   <button
                     type="button"
-                    data-testid="product-increase-quantity"
+                    className="decrease-increase-quantity"
                     onClick={ () => this.increaseItem(index) }
                   >
                     +
                   </button>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
+            <div className="total-price">{ `Total: R$ ${total.toFixed(2)}` }</div>
           </div>
-        ) : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
-        <Link to="/">Home</Link>
+        ) : <span>Seu carrinho está vazio</span>}
       </main>
     );
   }

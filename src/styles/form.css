@@ -1,0 +1,74 @@
+h2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 35px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+fieldset {
+  width: 80%;
+  margin-top: 5%;
+}
+
+.div-avaliation {
+  margin-left: 30%;
+  width: 100%;
+  padding: 15px;
+}
+
+.label-email {
+  width: 25%;
+}
+
+.product-detail-email {
+  padding: 5px;
+  border-radius: 5px;
+  width: 30%;
+  background-color: white;
+}
+
+.product-detail-evaluation {
+  padding: 5px;
+  border-radius: 5px;
+  width: 30%;
+  background-color: white; 
+}
+
+.submit-review-btn {
+  margin: 2%;
+  background-color: white;
+  border: 2px solid rgb(0, 209, 157);
+  border-radius: 5px;
+  color: white;
+  height: 35px;
+  font-size: 20px;
+  background-color: rgb(0, 209, 157);
+}
+
+.error-msg {
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+}
+
+.review-card {
+  font-size: 35px;
+  padding: 5px;
+}
+
+.line {
+  border: 1px solid rgb(20, 20, 20);
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+}

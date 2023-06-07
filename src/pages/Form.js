@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/form.css';
 
 class Form extends React.Component {
   constructor() {
@@ -58,102 +59,108 @@ class Form extends React.Component {
       <form>
         <h2>Avaliações</h2>
         <fieldset>
-          <label htmlFor="email">
-            <input
-              data-testid="product-detail-email"
-              type="email"
-              id="email"
-              name="email"
-              onChange={ this.onInputChange }
-              value={ email }
-              placeholder="Email"
-            />
-          </label>
-          <label htmlFor="um">
-            <input
-              data-testid="1-rating"
-              id="um"
-              name="nota"
-              type="radio"
-              value="1"
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <label htmlFor="dois">
-            <input
-              data-testid="2-rating"
-              id="dois"
-              name="nota"
-              type="radio"
-              value="2"
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <label htmlFor="tres">
-            <input
-              data-testid="3-rating"
-              id="tres"
-              name="nota"
-              type="radio"
-              value="3"
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <label htmlFor="quatro">
-            <input
-              data-testid="4-rating"
-              id="quatro"
-              name="nota"
-              type="radio"
-              value="4"
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <label htmlFor="cinco">
-            <input
-              data-testid="5-rating"
-              id="cinco"
-              name="nota"
-              type="radio"
-              value="5"
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <br />
-          <label htmlFor="text">
-            <textarea
-              data-testid="product-detail-evaluation"
-              id="text"
-              name="text"
-              placeholder="Menssagem (opcional)"
-              cols="30"
-              rows="10"
-              value={ text }
-              onChange={ this.onInputChange }
-            />
-          </label>
-          <br />
-          <button
-            data-testid="submit-review-btn"
-            type="button"
-            onClick={ this.onSaveButtonClick }
-          >
-            Avaliar
-          </button>
+          <div className="div-avaliation">
+            <label htmlFor="email" className="label-email">
+              <input
+                className="product-detail-email"
+                type="email"
+                id="email"
+                name="email"
+                onChange={ this.onInputChange }
+                value={ email }
+                placeholder="Email"
+              />
+            </label>
+            <label htmlFor="um">
+              <input
+                data-testid="1-rating"
+                id="um"
+                name="nota"
+                type="radio"
+                value="1"
+                onChange={ this.onInputChange }
+              />
+            </label>
+            <label htmlFor="dois">
+              <input
+                data-testid="2-rating"
+                id="dois"
+                name="nota"
+                type="radio"
+                value="2"
+                onChange={ this.onInputChange }
+              />
+            </label>
+            <label htmlFor="tres">
+              <input
+                data-testid="3-rating"
+                id="tres"
+                name="nota"
+                type="radio"
+                value="3"
+                onChange={ this.onInputChange }
+              />
+            </label>
+            <label htmlFor="quatro">
+              <input
+                data-testid="4-rating"
+                id="quatro"
+                name="nota"
+                type="radio"
+                value="4"
+                onChange={ this.onInputChange }
+              />
+            </label>
+            <label htmlFor="cinco">
+              <input
+                data-testid="5-rating"
+                id="cinco"
+                name="nota"
+                type="radio"
+                value="5"
+                onChange={ this.onInputChange }
+              />
+            </label>
+          </div>
+          <div className="div-avaliation">
+            <label htmlFor="text">
+              <textarea
+                className="product-detail-evaluation"
+                id="text"
+                name="text"
+                placeholder="Menssagem (opcional)"
+                cols="30"
+                rows="10"
+                value={ text }
+                onChange={ this.onInputChange }
+              />
+            </label>
+          </div>
+          <div className="div-avaliation">
+            <button
+              className="submit-review-btn"
+              type="button"
+              onClick={ this.onSaveButtonClick }
+            >
+              Avaliar
+            </button>
+          </div>
         </fieldset>
         { messageError
-          && <span data-testid="error-msg">Campos inválidos</span>}
+          && <p className="error-msg">Campos inválidos</p>}
         <fieldset>
           {savedAvaliations.map((avaliation, index) => (
             <div key={ index }>
-              <span>Email: </span>
-              <span data-testid="review-card-email">{ avaliation.email }</span>
-              <p data-testid="review-card-rating">
-                <span>Avaliação: </span>
-                { avaliation.nota}
-              </p>
-              <p data-testid="review-card-evaluation">{ avaliation.text }</p>
-              <p>_____________________________________________________________________</p>
+              <div className="div-avaliation">
+                <p className="review-card">{ `Email: ${avaliation.email}` }</p>
+                <p className="review-card">
+                  { `Nota: ${avaliation.nota}` }
+                </p>
+                <p className="review-card">
+                  { `Avaliação: ${avaliation.text}` }
+                </p>
+              </div>
+              <div className="line" />
             </div>
           ))}
         </fieldset>
