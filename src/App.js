@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 import Routes from './Routes';
 import logo from './images/logo.png';
 import shopping from './images/shopping-cart.png';
@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="div-logo">
         <img src={ logo } alt="logo" />
       </div>
@@ -19,7 +19,7 @@ function App() {
         </Link>
       </div>
       <Routes />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
