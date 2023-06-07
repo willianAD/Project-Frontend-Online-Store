@@ -1,4 +1,4 @@
-# TrybeTunes em React
+# Frontend-Online-Store em React
 
 O trabalho consiste em construir o Front-End de um e-commerce, uma loja online, alimentada por uma API do Mercado Livre.
 Conceito fundamental de React que permite que aplicações sejam dinâmicas e responsivas: estado de um componente. Além disso, gerenciar o estado e integrá-lo com capturas de eventos e formulários.
