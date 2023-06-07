@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Project-Frontend-Online-Store/static/css/main.236f3663.css",
+    "main.js": "/Project-Frontend-Online-Store/static/js/main.2f5f2534.js",
+    "static/media/shopping-cart.png": "/Project-Frontend-Online-Store/static/media/shopping-cart.9cebde7795e17c0311c2.png",
+    "static/media/seta-voltar.png": "/Project-Frontend-Online-Store/static/media/seta-voltar.5ef0d2751e7c66bb498f.png",
+    "static/media/logo.png": "/Project-Frontend-Online-Store/static/media/logo.9a3bf7c72f86e4c8182a.png",
+    "static/media/pesquisa.png": "/Project-Frontend-Online-Store/static/media/pesquisa.41d42f0563e16212544e.png",
+    "index.html": "/Project-Frontend-Online-Store/index.html",
+    "main.236f3663.css.map": "/Project-Frontend-Online-Store/static/css/main.236f3663.css.map",
+    "main.2f5f2534.js.map": "/Project-Frontend-Online-Store/static/js/main.2f5f2534.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.236f3663.css",
+    "static/js/main.2f5f2534.js"
+  ]
+}
