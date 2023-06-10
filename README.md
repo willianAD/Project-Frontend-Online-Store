@@ -25,6 +25,10 @@ Um projeto em time com a metodologia agile Kanban.
 
 ## Como usar
 
+Poderá ser acessado através deste link [clique aqui](https://willianad.github.io/Project-Frontend-Online-Store/).
+
+ou
+
 1. Clone este repositório:
 
 HTTPS:
